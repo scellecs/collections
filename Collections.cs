@@ -571,7 +571,7 @@ namespace Scellecs.Collections {
         public static T GetValueByIndex<T>(this IntHashMap<T> hashMap, in int index) => hashMap.data[index];
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int GetKeyByIndex<T>(this IntHashMap<T> hashMap, in int index) => hashMap.slots[index].key;
+        public static int GetKeyByIndex<T>(this IntHashMap<T> hashMap, in int index) => hashMap.slots[index].key - 1;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int TryGetIndex<T>(this IntHashMap<T> hashMap, in int key) {
@@ -881,7 +881,7 @@ namespace Scellecs.Collections {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetKeyByIndex<T>(this UnsafeIntHashMap<T> hashMap, in int index) where T : unmanaged {
             fixed (int* d = &hashMap.slots[0]) {
-                return *(d + index) - 1;
+                return (*(d + index)) - 1;
             }
         }
 
